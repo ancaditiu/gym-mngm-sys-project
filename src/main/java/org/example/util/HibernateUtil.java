@@ -1,7 +1,9 @@
 package org.example.util;
 
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
 
 public class HibernateUtil {
 
@@ -16,7 +18,7 @@ public class HibernateUtil {
 
     private static SessionFactory buildSessionFactory() {
         Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-        SessionFactory sessionFactoryLocal = configuration.buildSessionFactory();
-        return sessionFactoryLocal;
+        SessionFactory sessionFactory1 = configuration.buildSessionFactory();
+        return sessionFactory1;
     }
 }

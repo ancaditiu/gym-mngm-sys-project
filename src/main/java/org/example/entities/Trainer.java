@@ -2,11 +2,10 @@ package org.example.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.enums.Specialization;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,5 +18,11 @@ public class Trainer {
 
     private String firstName;
     private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    private Specialization specialization;
+
+    @OneToMany(mappedBy = "trainer")
+    private List<TrainingSession> trainingSessions;
 
 }
