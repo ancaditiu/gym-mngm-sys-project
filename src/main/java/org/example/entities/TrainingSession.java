@@ -5,6 +5,7 @@ import lombok.Setter;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -21,6 +22,11 @@ public class TrainingSession {
 @JoinColumn(name = "trainer_id")
     private Trainer trainer;
 
+    @ManyToMany
+    @JoinTable(name = "trainingSessions",
+            joinColumns = @JoinColumn(name = "trainingSession"),
+            inverseJoinColumns = @JoinColumn(name = "members"))
+    private List<Member> members;
 
 
 }
