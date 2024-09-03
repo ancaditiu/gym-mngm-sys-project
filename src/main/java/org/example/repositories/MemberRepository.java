@@ -51,8 +51,9 @@ public class MemberRepository {
 
         session.beginTransaction();
 
-        session.delete(member);
-
+        if(member != null){
+            session.delete(member);
+        }
         session.getTransaction().commit();
 
         session.close();

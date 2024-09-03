@@ -23,11 +23,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MembershipType membershipType;
 
-    @ManyToMany(mappedBy = "members")
+    @ManyToMany
+    @JoinTable(name = "member_trainingSessions",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "trainingSession_id"))
     private List<TrainingSession> trainingSessions;
-
-//Many-to-Many între Member și TrainingSession: Un membru poate participa la mai multe sesiuni
-// , iar o sesiune poate avea mai mulți membri înscriș
-
-
 }

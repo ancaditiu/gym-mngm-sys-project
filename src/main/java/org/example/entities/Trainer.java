@@ -25,4 +25,13 @@ public class Trainer {
     @OneToMany(mappedBy = "trainer")
     private List<TrainingSession> trainingSessions;
 
+    @Override
+    public String toString() {
+        return "Trainer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", specialization=" + specialization +
+                '}';
+    }
 }

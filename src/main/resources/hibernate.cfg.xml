@@ -9,10 +9,9 @@
         <property name="connection.password">gym</property>
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="show_sql">true</property>
-        <property name="hbm2ddl.auto">create</property> <!--optiuni posibile: update, none, create, create-drop-->
-<!--        <mapping class="org.example.relatii.entities.Student"/> &lt;!&ndash; de fiecare data cand cream o entitate, daca vrem s-o folosim, trebuie trecuta asa aici in fisier &ndash;&gt;-->
-    <mapping class="org.example.entities.Member"/>
-    <mapping class="org.example.entities.Trainer"/>
-    <mapping class="org.example.entities.TrainingSession"/>
+        <property name="hbm2ddl.auto">update</property> <!--optiuni posibile: update, none, create, create-drop-->
+        <mapping class="org.example.entities.Trainer"/>
+        <mapping class="org.example.entities.Member"/>
+        <mapping class="org.example.entities.TrainingSession"/>
     </session-factory>
 </hibernate-configuration>
