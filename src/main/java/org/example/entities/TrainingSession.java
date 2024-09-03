@@ -29,5 +29,4 @@ public class TrainingSession {
 
     @ManyToMany(mappedBy = "trainingSessions")
     private List<Member> members;
-
 }

@@ -28,5 +28,4 @@ public class Member {
             joinColumns = @JoinColumn(name = "member_id"),
             inverseJoinColumns = @JoinColumn(name = "trainingSession_id"))
     private List<TrainingSession> trainingSessions;
-
 }
