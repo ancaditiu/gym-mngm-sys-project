@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.example.enums.MembershipType;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,8 +23,10 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MembershipType membershipType;
 
-
-
-
+    @ManyToMany
+    @JoinTable(name = "member_trainingSessions",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "trainingSession_id"))
+    private List<TrainingSession> trainingSessions;
 
 }
