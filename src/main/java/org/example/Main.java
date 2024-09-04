@@ -91,7 +91,6 @@ public class Main {
 
     private static void saveTrainer() {
         Trainer trainer = new Trainer();
-
         System.out.print("Enter Last Name: \n");
         String lastName = scanner.nextLine();
         System.out.print("Enter First Name: \n");
@@ -133,66 +132,80 @@ public class Main {
     }
 
     private static void editTrainer() {
-        Trainer trainer = new Trainer();
-        System.out.print("What do you want to edit? (first name, last name or spcialization) \n");
-        String fieldToUpdate = scanner.nextLine();
-        switch (fieldToUpdate) {
-            case "first name": {
-                System.out.print("Insert new first name: \n");
-                String firstName = scanner.nextLine();
-                trainer.setFirstName(firstName);
-                trainerRepository.update(trainer);
-            }
-            break;
-            case "last name": {
-                System.out.print("Insert new last name: \n");
-                String lastName = scanner.nextLine();
-                trainer.setLastName(lastName);
-                trainerRepository.update(trainer);
-            }
-            break;
-            case "specialization": {
-                System.out.print("Insert new specialization: (FITNESS,BODYBUILDING,YOGA) \n");
-                String specialization = scanner.nextLine();
-                trainer.setSpecialization(Specialization.valueOf(specialization.toUpperCase()));
-                trainerRepository.update(trainer);
-            }
-            break;
-            default:
-                System.out.println("You didn't choose an option or you wrote it wrong");
+        System.out.print("What trainer do you want to edit? (insert id) \n");
+        int searchTrainerId = Integer.parseInt(scanner.nextLine());
+        Trainer foundTrainer = trainerRepository.findById(searchTrainerId);
+        if(trainerRepository.findById(searchTrainerId) != null){
+            System.out.print("What do you want to edit? (first name, last name or spcialization) \n");
+            String fieldToUpdate = scanner.nextLine();
+            switch (fieldToUpdate) {
+                case "first name": {
+                    System.out.print("Insert new first name: \n");
+                    String firstName = scanner.nextLine();
+                    foundTrainer.setFirstName(firstName);
+                    trainerRepository.update(foundTrainer);
+                }
                 break;
+                case "last name": {
+                    System.out.print("Insert new last name: \n");
+                    String lastName = scanner.nextLine();
+                    foundTrainer.setLastName(lastName);
+                    trainerRepository.update(foundTrainer);
+                }
+                break;
+                case "specialization": {
+                    System.out.print("Insert new specialization: (FITNESS,BODYBUILDING,YOGA) \n");
+                    String specialization = scanner.nextLine();
+                    foundTrainer.setSpecialization(Specialization.valueOf(specialization.toUpperCase()));
+                    trainerRepository.update(foundTrainer);
+                }
+                break;
+                default:
+                    System.out.println("You didn't choose an option or you wrote it wrong");
+                    break;
+            }
+        } else {
+            System.out.println("this trainer desn't exist");
+            editTrainer();
         }
     }
 
     private static void editMember() {
-        Member member = new Member();
-        System.out.print("What do you want to edit? (first name, last name or membership) \n");
-        String fieldToUpdate = scanner.nextLine();
-        switch (fieldToUpdate) {
-            case "first name": {
-                System.out.print("Insert new first name: \n");
-                String firstName = scanner.nextLine();
-                member.setFirstName(firstName);
-                memberRepository.update(member);
-            }
-            break;
-            case "last name": {
-                System.out.print("Insert new last name: \n");
-                String lastName = scanner.nextLine();
-                member.setLastName(lastName);
-                memberRepository.update(member);
-            }
-            break;
-            case "specialization": {
-                System.out.print("Insert new membership: (MONTHLY, ANNUALLY) \n");
-                String membership = scanner.nextLine();
-                member.setMembershipType(MembershipType.valueOf(membership.toUpperCase()));
-                memberRepository.update(member);
-            }
-            break;
-            default:
-                System.out.println("You didn't choose an option or you wrote it wrong");
+        System.out.print("What member do you want to edit? (insert id) \n");
+        int searchMemberId = Integer.parseInt(scanner.nextLine());
+        Member foundMember = memberRepository.findById(searchMemberId);
+        if(memberRepository.findById(searchMemberId) != null) {
+            System.out.print("What do you want to edit? (first name, last name or membership) \n");
+            String fieldToUpdate = scanner.nextLine();
+            switch (fieldToUpdate) {
+                case "first name": {
+                    System.out.print("Insert new first name: \n");
+                    String firstName = scanner.nextLine();
+                    foundMember.setFirstName(firstName);
+                    memberRepository.update(foundMember);
+                }
                 break;
+                case "last name": {
+                    System.out.print("Insert new last name: \n");
+                    String lastName = scanner.nextLine();
+                    foundMember.setLastName(lastName);
+                    memberRepository.update(foundMember);
+                }
+                break;
+                case "specialization": {
+                    System.out.print("Insert new membership: (MONTHLY, ANNUALLY) \n");
+                    String membership = scanner.nextLine();
+                    foundMember.setMembershipType(MembershipType.valueOf(membership.toUpperCase()));
+                    memberRepository.update(foundMember);
+                }
+                break;
+                default:
+                    System.out.println("You didn't choose an option or you wrote it wrong");
+                    break;
+            }
+        } else {
+            System.out.println("This member desn't exist");
+            editMember();
         }
     }
 
@@ -200,7 +213,6 @@ public class Main {
         System.out.print("What trainer do you want to delete: (insert id) \n");
         int id = Integer.parseInt(scanner.nextLine());
         Trainer foundTrainer = trainerRepository.findById(id);
-        System.out.println();
         trainerRepository.delete(foundTrainer);
     }
 
@@ -208,7 +220,6 @@ public class Main {
         System.out.print("What member do you want to delete: (insert id) \n");
         int id = Integer.parseInt(scanner.nextLine());
         Member foundMember = memberRepository.findById(id);
-        System.out.println();
         memberRepository.delete(foundMember);
     }
     public static void saveTrainingSession(){
