@@ -7,21 +7,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class TrainerRepository {
-    public void save(Trainer trainer) {
 
+    public void save(Trainer trainer) {
 
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Transaction transaction = session.getTransaction();
 
-
         session.save(trainer);
 
         transaction.commit();
         session.close();
-
     }
+
     public void update(Trainer trainer) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -30,17 +29,17 @@ public class TrainerRepository {
         session.update(trainer);
         session.getTransaction().commit();
         session.close();
-
     }
+
     public void delete(Trainer trainer) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(trainer);
         session.getTransaction().commit();
-        session.close();//
-
+        session.close();
     }
+
     public Trainer findById(int id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -51,6 +50,7 @@ public class TrainerRepository {
         session.close();
         return trainer;
     }
+
     public void delete(int id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();//1
@@ -59,7 +59,6 @@ public class TrainerRepository {
         if (trainer != null) {
             session.delete(trainer);
         }
-
         session.getTransaction().commit();
         session.close();
     }
