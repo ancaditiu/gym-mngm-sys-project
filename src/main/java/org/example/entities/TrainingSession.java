@@ -21,7 +21,6 @@ public class TrainingSession {
     @Enumerated(EnumType.STRING)
     private SessionName sessionName;
     private String schedule;
-    private String trainerId;
 
     @ManyToOne
     @JoinColumn(name = "trainer_id")
