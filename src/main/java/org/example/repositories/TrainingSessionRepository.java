@@ -1,6 +1,5 @@
 package org.example.repositories;
 
-import org.example.entities.Trainer;
 import org.example.entities.TrainingSession;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
@@ -9,7 +8,7 @@ import org.hibernate.Transaction;
 
 public class TrainingSessionRepository {
 
-    public void saveTrainingSession(TrainingSession trainingSession) {
+    public void save(TrainingSession trainingSession) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -21,7 +20,7 @@ public class TrainingSessionRepository {
         session.close();
     }
 
-    public void updateTrainingSession(TrainingSession trainingSession) {
+    public void update(TrainingSession trainingSession) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -31,7 +30,7 @@ public class TrainingSessionRepository {
         session.close();
     }
 
-    public void deleteTrainingSession(TrainingSession trainingSession) {
+    public void delete(TrainingSession trainingSession) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();

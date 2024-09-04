@@ -3,6 +3,7 @@ package org.example;
 import org.example.entities.Member;
 import org.example.entities.TrainingSession;
 import org.example.enums.MembershipType;
+import org.example.enums.SessionName;
 import org.example.repositories.MemberRepository;
 
 import org.example.entities.Trainer;
@@ -11,6 +12,8 @@ import org.example.repositories.TrainerRepository;
 import org.example.repositories.TrainingSessionRepository;
 import org.example.util.HibernateUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -207,5 +210,40 @@ public class Main {
         Member foundMember = memberRepository.findById(id);
         System.out.println();
         memberRepository.delete(foundMember);
+    }
+    public static void saveTrainingSession(){
+       TrainingSession trainingSession = new TrainingSession();
+        System.out.print("Enter Session Name: \n");
+        String sessionName = scanner.nextLine();
+        trainingSession.setSessionName(SessionName.valueOf(sessionName.toUpperCase()));
+
+        System.out.print("Enter Trainer id for this session training: \n");
+        int id = Integer.parseInt(scanner.nextLine());
+        Trainer trainer = trainerRepository.findById(id);
+        trainingSession.setTrainer(trainer);
+        System.out.println("Enter Training Schedule ");
+        String schedule = scanner.nextLine();
+        trainingSession.setSchedule(schedule);
+        List<Member> memberList = new ArrayList<>();
+        System.out.println("Do you want to add member? Yes or No");
+        String answer = scanner.nextLine();
+        if("Yes".equals(answer)){
+            boolean flag = true;
+            while (flag){
+                System.out.println("What is the id of the member? ");
+                int memberId = Integer.parseInt(scanner.nextLine());
+                Member member = memberRepository.findById(memberId);
+                memberList.add(member);
+                System.out.println("Do you want to add another member? Yes or No");
+                String answer2 = scanner.nextLine();
+                if("No".equals(answer2)){
+                    flag = false;
+                }
+            }
+            trainingSession.setMembers(memberList);
+        }
+
+        trainingSessionRepository.save(trainingSession);
+
     }
 }
