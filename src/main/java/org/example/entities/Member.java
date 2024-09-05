@@ -23,9 +23,17 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MembershipType membershipType;
 
-    @ManyToMany
-    @JoinTable(name = "member_trainingSessions",
-            joinColumns = @JoinColumn(name = "member_id"),
-            inverseJoinColumns = @JoinColumn(name = "trainingSession_id"))
+    @ManyToMany(mappedBy = "members",fetch = FetchType.EAGER)
     private List<TrainingSession> trainingSessions;
+
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", membershipType=" + membershipType +
+                '}';
+    }
 }
