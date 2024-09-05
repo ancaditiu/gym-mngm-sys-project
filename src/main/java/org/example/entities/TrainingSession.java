@@ -26,6 +26,10 @@ public class TrainingSession {
     @JoinColumn(name = "trainer_id")
     private Trainer trainer;
 
-    @ManyToMany(mappedBy = "trainingSessions")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "trainingSession_member",
+            joinColumns = @JoinColumn(name = "trainingSession_id"),
+            inverseJoinColumns = @JoinColumn(name = "member_id"))
     private List<Member> members;
+
 }

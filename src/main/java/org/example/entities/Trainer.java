@@ -22,7 +22,7 @@ public class Trainer {
     @Enumerated(EnumType.STRING)
     private Specialization specialization;
 
-    @OneToMany(mappedBy = "trainer")
+    @OneToMany(mappedBy = "trainer" , fetch = FetchType.EAGER) // o sa aduca absolut tot din baza de date cu fetchType.EAGER
     private List<TrainingSession> trainingSessions;
 
     @Override

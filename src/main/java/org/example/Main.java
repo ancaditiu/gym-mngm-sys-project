@@ -11,7 +11,9 @@ import org.example.enums.Specialization;
 import org.example.repositories.TrainerRepository;
 import org.example.repositories.TrainingSessionRepository;
 import org.example.util.HibernateUtil;
+import org.hibernate.LazyInitializationException;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -57,8 +59,10 @@ public class Main {
                     deleteMember();
                     break;
                 case 9:
+                    saveTrainingSession();
                     break;
                 case 10:
+                    viewTrainingSession();
                     break;
                 case 11:
                     break;
@@ -84,6 +88,8 @@ public class Main {
         System.out.println("\n6. Edit Member");
         System.out.println("\n7. Delete Trainer");
         System.out.println("\n8. Delete Member");
+        System.out.println("\n9. Add Training Session");
+        System.out.println("\n10. View Training Session");
         System.out.println("\n13. Exit application");
 
         System.out.print("Enter your choice: ");
@@ -223,12 +229,12 @@ public class Main {
         memberRepository.delete(foundMember);
     }
     public static void saveTrainingSession(){
-       TrainingSession trainingSession = new TrainingSession();
+        TrainingSession trainingSession = new TrainingSession();
         System.out.print("Enter Session Name: \n");
         String sessionName = scanner.nextLine();
         trainingSession.setSessionName(SessionName.valueOf(sessionName.toUpperCase()));
 
-        System.out.print("Enter Trainer id for this session training: \n");
+        System.out.print("Enter Trainer id for this session training: ");
         int id = Integer.parseInt(scanner.nextLine());
         Trainer trainer = trainerRepository.findById(id);
         trainingSession.setTrainer(trainer);
@@ -253,8 +259,35 @@ public class Main {
             }
             trainingSession.setMembers(memberList);
         }
-
         trainingSessionRepository.save(trainingSession);
-
     }
+
+    public static void viewTrainingSession(){
+        System.out.println("What training session do you want to see? (Insert Trainer or Member) ");
+        String answer = scanner.nextLine();
+        if("Trainer".equals(answer)){
+            System.out.println("What trainer do you want to see the schedule for? (Insert ID) ");
+             int trainerId = Integer.parseInt(scanner.nextLine());
+             List<TrainingSession> trainingSessionList = trainerRepository.findById(trainerId).getTrainingSessions();
+            System.out.println("The trainer has the following schedule ");
+            for(TrainingSession tr : trainingSessionList){
+                System.out.println("Session " + tr.getSessionName() + " has the following schedule " + tr.getSchedule());
+            }
+        } else if ("Member".equals(answer)) {
+            System.out.println("What Member do you want to see the schedule for? (Insert ID) ");
+            int memberId = Integer.parseInt(scanner.nextLine());
+            List<TrainingSession> trainingSessions = memberRepository.findById(memberId).getTrainingSessions();
+            System.out.println("The member has following schedule ");
+            for(TrainingSession ms : trainingSessions){
+                System.out.println("Session " + ms.getSessionName() + " has the following schedule " + ms.getSchedule());
+            }
+        }
+    }
+    public static void editTrainingSession(){
+        System.out.println("What training session do you want to edit? (Insert training session ID )");
+        int sessionId = Integer.parseInt(scanner.nextLine());
+        TrainingSession trainingSession1 = trainingSessionRepository.findById(sessionId);
+    }
+
+
 }
