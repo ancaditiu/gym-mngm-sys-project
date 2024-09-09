@@ -13,5 +13,7 @@
         <mapping class="org.example.entities.Trainer"/>
         <mapping class="org.example.entities.Member"/>
         <mapping class="org.example.entities.TrainingSession"/>
+        <mapping class="org.example.entities.Progress"/>
+        <mapping class="org.example.entities.Subscription"/>
     </session-factory>
 </hibernate-configuration>

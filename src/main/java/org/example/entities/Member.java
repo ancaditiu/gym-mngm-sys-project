@@ -26,6 +26,11 @@ public class Member {
     @ManyToMany(mappedBy = "members",fetch = FetchType.EAGER)
     private List<TrainingSession> trainingSessions;
 
+    @OneToOne(mappedBy = "members",fetch = FetchType.EAGER)
+    private Subscription subscription;
+
+    @OneToMany(mappedBy = "members")
+    private List<Progress> progresses; // list pentru ca are legatura cu mai multe progrese
 
     @Override
     public String toString() {
