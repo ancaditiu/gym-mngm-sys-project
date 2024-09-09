@@ -32,4 +32,14 @@ public class TrainingSession {
             inverseJoinColumns = @JoinColumn(name = "member_id"))
     private List<Member> members;
 
+    @Override
+    public String toString() {
+        return "TrainingSession{" +
+                "id=" + id +
+                ", sessionName=" + sessionName +
+                ", schedule='" + schedule + '\'' +
+                ", trainer=" + trainer +
+                ", members=" + members +
+                '}';
+    }
 }
